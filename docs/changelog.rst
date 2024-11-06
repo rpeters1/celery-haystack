@@ -1,6 +1,27 @@
 Changelog
 =========
 
+v1.0 (2024-11-06)
+-----------------
+
+* Updated to support Python 3.11, Django 4.2.5, and Celery 5.3.0.
+
+* Improved type hinting compatibility with Python 3.11, ensuring clear and consistent type definitions.
+
+* Simplified transaction management by leveraging Django’s `transaction.on_commit` for reliable task queuing.
+
+* Enhanced logging using f-strings for readability and updated logging calls to follow modern conventions.
+
+* Refined configuration handling for optional settings, ensuring better error handling and default values.
+
+* Revised `CELERY_HAYSTACK_QUEUE` and `CELERY_HAYSTACK_COUNTDOWN` to align with the latest Celery configuration standards.
+
+* Removed deprecated import handling for `import_module`, simplifying code.
+
+* Improved error messages for configuration issues, with clearer feedback for developers.
+
+* Cleaned up documentation and code comments for better maintainability and clarity.
+
 v0.9 (2015-06-13)
 -----------------
 

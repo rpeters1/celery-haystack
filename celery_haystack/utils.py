@@ -1,35 +1,43 @@
 from django.core.exceptions import ImproperlyConfigured
-try:
-    from importlib import import_module
-except ImportError:
-    from django.utils.importlib import import_module
-from django.db import connection, transaction
-
+from importlib import import_module
+from django.db import transaction
 from haystack.utils import get_identifier
-
 from .conf import settings
 
 
-def get_update_task(task_path=None):
+def get_update_task(task_path: str | None = None):
+    """
+    Imports and returns the Celery task class specified by task_path.
+
+    Args:
+        task_path (str | None): The full path of the task to be imported.
+
+    Raises:
+        ImproperlyConfigured: If the specified task cannot be imported.
+
+    Returns:
+        A Celery Task class instance.
+    """
     import_path = task_path or settings.CELERY_HAYSTACK_DEFAULT_TASK
     module, attr = import_path.rsplit('.', 1)
     try:
         mod = import_module(module)
     except ImportError as e:
-        raise ImproperlyConfigured('Error importing module %s: "%s"' %
-                                   (module, e))
+        raise ImproperlyConfigured(f'Error importing module {module}: "{e}"')
     try:
         Task = getattr(mod, attr)
     except AttributeError:
-        raise ImproperlyConfigured('Module "%s" does not define a "%s" '
-                                   'class.' % (module, attr))
+        raise ImproperlyConfigured(f'Module "{module}" does not define a "{attr}" class.')
     return Task()
 
 
-def enqueue_task(action, instance, **kwargs):
+def enqueue_task(action: str, instance, **kwargs):
     """
-    Common utility for enqueuing a task for the given action and
-    model instance.
+    Enqueues a task for the given action and model instance.
+
+    Args:
+        action (str): The action to be performed (e.g., 'update' or 'delete').
+        instance: The model instance associated with the action.
     """
     identifier = get_identifier(instance)
     options = {}
@@ -39,19 +47,10 @@ def enqueue_task(action, instance, **kwargs):
         options['countdown'] = settings.CELERY_HAYSTACK_COUNTDOWN
 
     task = get_update_task()
-    task_func = lambda: task.apply_async(  # noqa: E731
-        (action, identifier), kwargs, **options
-    )
+    task_func = lambda: task.apply_async((action, identifier), kwargs, **options)
 
+    # Use Django's on_commit hook to ensure task is queued only after transaction is committed
     if hasattr(transaction, 'on_commit'):
-        # Django 1.9 on_commit hook
-        transaction.on_commit(
-            task_func
-        )
-    elif hasattr(connection, 'on_commit'):
-        # Django-transaction-hooks
-        connection.on_commit(
-            task_func
-        )
+        transaction.on_commit(task_func)
     else:
         task_func()

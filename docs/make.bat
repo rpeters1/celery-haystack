@@ -84,8 +84,7 @@ if "%1" == "htmlhelp" (
 	%SPHINXBUILD% -b htmlhelp %ALLSPHINXOPTS% %BUILDDIR%/htmlhelp
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished; now you can run HTML Help Workshop with the ^
-.hhp project file in %BUILDDIR%/htmlhelp.
+	echo.Build finished; the HTML help project files are in %BUILDDIR%/htmlhelp.
 	goto end
 )
 
@@ -93,11 +92,7 @@ if "%1" == "qthelp" (
 	%SPHINXBUILD% -b qthelp %ALLSPHINXOPTS% %BUILDDIR%/qthelp
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Build finished; now you can run "qcollectiongenerator" with the ^
-.qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\celery-haystack.qhcp
-	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\celery-haystack.ghc
+	echo.Build finished; the Qt help project files are in %BUILDDIR%/qthelp.
 	goto end
 )
 
@@ -153,8 +148,7 @@ if "%1" == "linkcheck" (
 	%SPHINXBUILD% -b linkcheck %ALLSPHINXOPTS% %BUILDDIR%/linkcheck
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Link check complete; look for any errors in the above output ^
-or in %BUILDDIR%/linkcheck/output.txt.
+	echo.Link check complete; look for errors in the output or in %BUILDDIR%/linkcheck/output.txt.
 	goto end
 )
 
@@ -162,8 +156,7 @@ if "%1" == "doctest" (
 	%SPHINXBUILD% -b doctest %ALLSPHINXOPTS% %BUILDDIR%/doctest
 	if errorlevel 1 exit /b 1
 	echo.
-	echo.Testing of doctests in the sources finished, look at the ^
-results in %BUILDDIR%/doctest/output.txt.
+	echo.Testing of doctests finished; results are in %BUILDDIR%/doctest/output.txt.
 	goto end
 )
 

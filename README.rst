@@ -12,36 +12,27 @@ deleting objects in a Haystack_ search index.
 Requirements
 ------------
 
-* Django 1.8+
-* Haystack_ `2.X`_
-* Celery_ 3.X
+* Python 3.11
+* Django 4.2.5
+* Haystack 2.X_
+* Celery 5.3.0
 
-You also need to install your choice of one of the supported search engines
-for Haystack and one of the supported backends for Celery.
-
+You will also need to install a supported search engine for Haystack and a backend for Celery.
 
 .. _Haystack: http://haystacksearch.org
 .. _Celery: http://www.celeryproject.org
 
-
 Installation
 ------------
 
-Use your favorite Python package manager to install the app from PyPI, e.g.::
+Install the package via PyPI:
 
     pip install celery-haystack
-
-
-For Django < 1.9 you need to install and configure `django-transaction-hooks`_ -- an app that
-brings transaction commit hooks to Django.
-
-.. _django-transaction-hooks: https://github.com/carljm/django-transaction-hooks
-
 
 Usage
 -----
 
-1. Add ``'celery_haystack'`` to the ``INSTALLED_APPS`` setting
+1. Add ``'celery_haystack'`` to the ``INSTALLED_APPS`` setting:
 
    .. code:: python
 
@@ -50,15 +41,15 @@ Usage
          'celery_haystack',
      ]
 
-2. Enable the celery-haystack signal processor in the settings
+2. Enable the celery-haystack signal processor in your settings:
 
    .. code:: python
 
     HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 
-3. Alter all of your ``SearchIndex`` subclasses to inherit from
+3. Update your ``SearchIndex`` subclasses to inherit from
    ``celery_haystack.indexes.CelerySearchIndex`` and
-   ``haystack.indexes.Indexable``
+   ``haystack.indexes.Indexable``:
 
    .. code:: python
 
@@ -72,14 +63,12 @@ Usage
          def get_model(self):
              return Note
 
-4. Ensure your Celery instance is running.
+4. Ensure your Celery instance is running and configured.
 
 Thanks
 ------
 
-This app is a blatant rip-off of Daniel Lindsley's queued_search_
-app but uses Ask Solem Hoel's Celery_ instead of the equally awesome
-queues_ library by Matt Croyden.
+This app builds upon Daniel Lindsley's queued_search_ app but uses Ask Solem Hoel's Celery_ for queuing.
 
 .. _queued_search: https://github.com/toastdriven/queued_search/
 .. _Celery: http://celeryproject.org/
@@ -88,7 +77,6 @@ queues_ library by Matt Croyden.
 Issues
 ------
 
-Please use the `Github issue tracker`_ for any bug reports or feature
-requests.
+Please use the `Github issue tracker`_ for any bug reports or feature requests.
 
 .. _`Github issue tracker`: https://github.com/django-haystack/celery-haystack/issues

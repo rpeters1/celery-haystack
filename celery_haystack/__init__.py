@@ -1,4 +1,4 @@
-__version__ = '0.10'
+__version__ = '0.20'
 
 
 def version_hook(config):

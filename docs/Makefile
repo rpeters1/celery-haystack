@@ -1,5 +1,4 @@
 # Makefile for Sphinx documentation
-#
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
@@ -54,36 +53,34 @@ singlehtml:
 pickle:
 	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
 	@echo
-	@echo "Build finished; now you can process the pickle files."
+	@echo "Build finished; you can now process the pickle files."
 
 json:
 	$(SPHINXBUILD) -b json $(ALLSPHINXOPTS) $(BUILDDIR)/json
 	@echo
-	@echo "Build finished; now you can process the JSON files."
+	@echo "Build finished; you can now process the JSON files."
 
 htmlhelp:
 	$(SPHINXBUILD) -b htmlhelp $(ALLSPHINXOPTS) $(BUILDDIR)/htmlhelp
 	@echo
-	@echo "Build finished; now you can run HTML Help Workshop with the" \
-	      ".hhp project file in $(BUILDDIR)/htmlhelp."
+	@echo "Build finished; run HTML Help Workshop with the .hhp project file in $(BUILDDIR)/htmlhelp."
 
 qthelp:
 	$(SPHINXBUILD) -b qthelp $(ALLSPHINXOPTS) $(BUILDDIR)/qthelp
 	@echo
-	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
-	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/celery-haystack.qhcp"
+	@echo "Build finished; run \`qcollectiongenerator\` with the .qhcp project file in $(BUILDDIR)/qthelp:"
+	@echo "  qcollectiongenerator $(BUILDDIR)/qthelp/celery-haystack.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/celery-haystack.qhc"
+	@echo "  assistant -collectionFile $(BUILDDIR)/qthelp/celery-haystack.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/celery-haystack"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/celery-haystack"
-	@echo "# devhelp"
+	@echo "  mkdir -p $$HOME/.local/share/devhelp/celery-haystack"
+	@echo "  ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/celery-haystack"
+	@echo "  devhelp"
 
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
@@ -94,8 +91,7 @@ latex:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
 	@echo
 	@echo "Build finished; the LaTeX files are in $(BUILDDIR)/latex."
-	@echo "Run \`make' in that directory to run these through (pdf)latex" \
-	      "(use \`make latexpdf' here to do that automatically)."
+	@echo "Run \`make\` in that directory to process these with (pdf)latex, or use \`make latexpdf\` here."
 
 latexpdf:
 	$(SPHINXBUILD) -b latex $(ALLSPHINXOPTS) $(BUILDDIR)/latex
@@ -121,10 +117,8 @@ changes:
 linkcheck:
 	$(SPHINXBUILD) -b linkcheck $(ALLSPHINXOPTS) $(BUILDDIR)/linkcheck
 	@echo
-	@echo "Link check complete; look for any errors in the above output " \
-	      "or in $(BUILDDIR)/linkcheck/output.txt."
+	@echo "Link check complete; check for errors in the output or in $(BUILDDIR)/linkcheck/output.txt."
 
 doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
-	@echo "Testing of doctests in the sources finished, look at the " \
-	      "results in $(BUILDDIR)/doctest/output.txt."
+	@echo "Doctest complete; see results in $(BUILDDIR)/doctest/output.txt."
